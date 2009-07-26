@@ -10,6 +10,7 @@ Follow these steps to install a meipi in your own server.
 
   * Install a web server
   * Install php
+  * Install imagemagick and php-gd (imagemagick, php5-gd). Your hosting web server might have them already available.
   * Create a database and keep the configuration that you will need later
   * Download latest available version for Meipi
   * Execute rc/install.sql in the database

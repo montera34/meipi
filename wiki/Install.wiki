@@ -1,0 +1,25 @@
+#summary Installation instructions
+#labels Featured,howto
+
+= Introduction =
+
+Follow these steps to install a meipi in your own server.
+
+
+= Details =
+
+* Install a web server
+* Install php
+* Create a database and keep the configuration that you will need later
+* Download latest available version for Meipi
+* Execute rc/install.sql in the database
+* Copy configuration files from meipi/config/ and remove ".default" from their name
+* Update file meipi/config/dbConfig.php
+  * $usr = Database user
+  * $pass = Database password
+  * $server = Database server
+  * $db = Database name
+* Update meipi/config/meipi.php. Check the comments for more info but make sure you update the following mandatory parameters
+  * baseFolder = Path of the files in the web servers filesystem. Must end in '/'
+  * google_maps_keys = Google Maps API keys. It is not needed for testing meipi in localhost but it is required to get one Google Maps API key for each domain used.
+* Give read and write permissions to the user running the web server to all folders under meipi/images/ and all folders under meipi/profile/images/

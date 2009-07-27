@@ -13,7 +13,7 @@ Follow these steps to install a meipi in your own server.
   * Install imagemagick and php-gd (imagemagick, php5-gd). Your hosting web server might have them already available.
   * Create a database and keep the configuration that you will need later
   * Download latest available version for Meipi
-  * Execute rc/install.sql in the database
+  * Execute rc/install.sql in the database. Note: At the end of the file you can find the categories to create. You can update category names and descriptions
   * Copy configuration files from meipi/config/ and remove ".default" from their name
   * Update file meipi/config/dbConfig.php
     * $usr = Database user
@@ -24,3 +24,14 @@ Follow these steps to install a meipi in your own server.
     * baseFolder = Path of the files in the web servers filesystem. Must end in '/'
     * google_maps_keys = Google Maps API keys. It is not needed for testing meipi in localhost but it is required to get one Google Maps API key for each domain used.
   * Give read and write permissions to the user running the web server to all folders under meipi/images/ and all folders under meipi/profile/images/
+
+= Post installation =
+  * Check the meipi/meipi.php file using a web server. If images, css files are not loading, check $commonFiles variable
+  * Register a user and log in
+  * Create a new entry with an image
+    * If entry is saved and entry images are displayed -> Ok!
+    * If entry is saved but images are not displayed
+      * Check write permissions for web server user in images files
+      * Check imagemagick installation
+  * Go to map page. If label is not displayed -> Check gd installation
+  * Add admin and editor users to meipi_permission table. Check your id_user in "My profile" page or in database. Values for type in meipi_permission table are 1 for Admin and 2 for Editor

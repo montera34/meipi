@@ -3,33 +3,45 @@
 
 = Introduction =
 
-Follow these steps to install a meipi in your own server.
+The following instructions will guide you through the installation of a _meipi_ in your own server.
+
+*Note:* If you just want to create a meipi online in meipi.org, go to http://meipi.org/meipimatic.php
+
+*Note:* The current instructions are intended for a Linux installation.
 
 
-= Details =
+= Previous requirements =
 
-  * Install a web server
-  * Install php
+  * Install a web server.
+  * Install php.
   * Install imagemagick and php-gd (imagemagick, php5-gd). Your hosting web server might have them already available.
-  * Create a database and keep the configuration that you will need later
-  * Download latest available version for Meipi
-  * Execute rc/install.sql in the database. Note: At the end of the file you can find the categories to create. You can update category names and descriptions
-  * Copy configuration files from meipi/config/ and remove ".default" from their name
-  * Update file meipi/config/dbConfig.php
+  * Create a database. Keep the configuration details handy: you need them soon.
+
+= Installation =
+
+  * Download the latest available version of the *Meipi* code.
+  * Execute rc/install.sql in the database in order to create the necessary tables. Note: At the end of the file you can find the categories to create. You can update category names and descriptions.
+  * Copy configuration files from meipi/config/ and remove ".default" from their name:
+    * dbConfig.php.default to dbConfig.php
+    * meipiConfig.php.default to meipiConfig.php
+  * Update file meipi/config/dbConfig.php with your database details:
     * $usr = Database user
     * $pass = Database password
     * $server = Database server
     * $db = Database name
-  * Update meipi/config/meipi.php. Check the comments for more info but make sure you update the following mandatory parameters
+  * Update meipi/config/meipiConfig.php. Check the comments for more configuration options, but make sure you update the following mandatory parameters at least:
     * baseFolder = Path of the files in the web servers filesystem. Must end in '/'
     * google_maps_keys = Google Maps API keys. It is not needed for testing meipi in localhost but it is required to get one Google Maps API key for each domain used.
   * Give read and write permissions to the user running the web server to all folders under meipi/images/ and all folders under meipi/profile/images/
 
 = Post installation =
-  * Check the meipi/meipi.php file using a web server. If images, css files are not loading, check $commonFiles variable
+
+Some basic checks to ensure that your _meipi_ is running properly:
+
+  * Check the meipi/meipi.php file using a web server. If images and css files are not loading, check $commonFiles variable
   * Register a user and log in
   * Create a new entry with an image
-    * If entry is saved and entry images are displayed -> Ok!
+    * If entry is saved and entry images are displayed -> Ok! :-)
     * If entry is saved but images are not displayed
       * Check write permissions for web server user in images files
       * Check imagemagick installation

@@ -1,0 +1,40 @@
+/* CSS Document */
+#leftColumn { float:left; width:47%; padding:15px 0px 0px 0px; background-color:#ffffff;}
+#rightColumn {float:left; width:47%; padding:15px 0px 0px 0px; background-color:#ffffff;}
+
+#mapmap { text-align:center;}
+#mCanales{ width:100%;
+	clear:both;
+	float:left;
+	margin: 20px 0px 0px 15px;
+} /* para meter todos los canales en el meipi.php*/
+#mCanales h2 {font-size: 1.4em;margin:0px 0px 10px 0px;}
+#mCanal1, #mCanal3, #mCanal2, #mCanal4 {float:left; width:48%; min-width:190px; padding:0px 0px 10px 0px; margin:0px 0px 5px 5px;}
+#mCanal1, #mCanal3 { clear:both; }/*div de cada canal*/
+#mCanal2, #mCanal4 {}/*div de cada canal*/
+
+#entradas h2 {font-size: 1.6em;}
+
+#entradasMeipi {
+	clear: both;
+	float: left;
+	margin: 0px 0px 15px 0px;
+	padding:0px 0px 0px 15px;
+	}
+
+#estrecho {width:100%}
+#comments {clear:both;	width:90%;	
+	margin: 0px 0px 0px 15px;}
+#comments h2 {/*	font-size: 1.6em;*/}
+
+#description {
+	width: 100%;
+	background-color: #45A0C5;
+	margin:10px 0 15px 0px;
+	}
+#description h2, #entradasMeipi h2, #comments h2 {font-size: 1.4em;margin:0px;}
+#description p {font-size:1.2em; line-height:1.3em;margin:5px 0px 0px 0px;}
+
+#mosaicMeipi {padding:0px 0px 0px 15px;}
+#mosaicMeipi img {margin:6px 0px 20px 0px;}
+

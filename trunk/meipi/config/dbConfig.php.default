@@ -1,0 +1,26 @@
+<?
+	// Database
+	$usr = "meipi";
+	$pass = "";
+	$server = "localhost";
+	$db = "meipi";
+
+	$idMeipi = "meipi";
+
+	define("PREFIX", $idMeipi."_");
+	define("CATEGORY", PREFIX."category");
+	define("COMMENT", PREFIX."comment");
+	define("CONTENT", PREFIX."content");
+	define("ENTRY", PREFIX."entry");
+	define("ENTRY_TAG", PREFIX."entry_tag");
+	define("MOSAIC", PREFIX."mosaic");
+	define("MOSAIC_ITEM", PREFIX."mosaic_item");
+	define("SELECTED_ITEM", PREFIX."selected_item");
+	define("TAG", PREFIX."tag");
+	define("VOTE", PREFIX."vote");
+	define("EXTRA", PREFIX."extra");
+	define("USER", PREFIX."user");
+	define("MESSAGES", PREFIX."messages");
+	define("PERMISSION", PREFIX."permission");
+	define("MEIPI", "meipi");
+?>

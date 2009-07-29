@@ -1,0 +1,13 @@
+#canal1, #canal2 {
+	float:left;
+	margin:0 0.5%;
+	min-width:200px;
+	width:49%;
+}
+#canal3, #canal4 {
+	display: none;
+}
+
+#mCanal3, #mCanal4 {
+	display: none;
+}

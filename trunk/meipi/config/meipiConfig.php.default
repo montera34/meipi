@@ -1,0 +1,236 @@
+<?
+
+	// DB
+	require_once("dbConfig.php");
+
+	// Main Url: The address where this meipi is hosted
+	$mainUrl = "http://www.example.com/";
+
+	// Links
+	$meipiUrl = "http://www.meipi.org/";
+	$blogUrl = "http://blog.meipi.org/";
+	$aboutUrl = "http://www.meipi.org/about.php";
+	$licenseUrl = "http://creativecommons.org/licenses/by-sa/2.5/es/";
+	$faqUrl = "http://www.meipi.org/faq.php";
+	$legalUrl = "http://www.meipi.org/legal.php";
+
+	// Base Folder: The local path to the code
+	$baseFolder = "/home/meipi/trunk/meipi/"; // TODO
+
+	// Configuration for Google Maps // TODO
+	$google_maps_keys = array(
+		"www.example.com/meipi" => "GOOGLE_MAPS_API_KEY_1",
+		"example.com/meipi" => "GOOGLE_MAPS_API_KEY_2",
+		// Default
+		"" => "GOOGLE_MAPS_API_KEY_1"
+	);
+	function getGoogleMapsKey()
+	{
+		global $google_maps_keys;
+		foreach($google_maps_keys as $address => $googleMapsKey)
+		{
+			if($address==="" || strpos($_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"], $address)!==FALSE)
+			{
+				return $googleMapsKey;
+			}
+		}
+	}
+	$google_maps_key = getGoogleMapsKey();
+
+	// Date configuration (time difference with the server time)
+	$timeDifference = 0;
+	
+	// Map Controls - Zoom level for map and for last entry
+	$zoomLevel = 15;
+	$zoomLevelLastEntry = 16;
+
+	// Map Controls - Limit values:
+	//$minLat = 40.0;
+	//$maxLat = 41.0;
+	//$minLon = -4.0;
+	//$maxLon = -3.5;
+
+	// Maps Controls - Center address:
+	//$centerAddress = "Paseo de la chopera, 12, 28045";
+	//$city = "Madrid, Spain";
+
+	// Map Controls - Buttons:
+	// $viewButtons = "";
+	// $defaultMapView = "";
+	//
+
+	// Web title, Web description, and Long description:
+	$webTitle = "Meipi";
+	$webName = "meipi";
+	$webDescription = "This is a meipi";
+	// $longDesc = "This meipi is used for this...";
+	// $longDescription = "This meipi is used for this..."; // TODO: Why 2?
+
+	// Default Language:
+	// $lang = "es";
+
+	// Meipi Password:
+	// $meipiPassword = "";
+
+	// Icons instead of text markers in the map:
+	// $useIcons = "true";
+	// Length of text markers:
+	// $labelMaxLength = "20";
+
+	// Extra styles:
+	// $extraStyles = "";
+
+	// List of plugins enabled
+	// $plugins = "";
+
+	// Extra table is used for extra parameters
+	// $extraTable = "true";
+	if($extraTable=="true")
+	{
+		$aExtraConfig = getMeipimaticExtraConfig($idMeipi);
+	}
+
+	// Information for default location
+	$city = "Gijon, Spain";
+	$centerAddress = "Avenida de la Constitucion, 1";
+	$cityTitle = "Gijon";
+
+	$aCities[0]["city"] = $city;
+	$aCities[0]["address"] = $centerAddress;
+	$aCities[0]["title"] = $cityTitle;
+
+	// Add more locations
+	// $aCities[1]["city"] = "Madrid";
+	// $aCities[1]["address"] = "Puerta del Sol, 1";
+	// $aCities[1]["title"] = "Madrid";
+
+	// Common files
+	$commonFiles = "/meipi/"; // TODO
+
+	// Configuration for images storage
+	// Relative path from $baseFolder (filesystem) and $commonFiles (web server)
+	$dirOriginal = "images/original/";
+	$dirThumbnail = "images/thumbnail/";
+	$dirSquare = "images/square/";
+	$dirEntry = "images/entry/";
+
+	// Image configuration
+	$imageTypes = array(
+		"original" => array(
+			"dir" => "$dirOriginal",
+			"size" => "100%"
+		),
+		"entry" => array(
+			"dir" => "$dirEntry",
+			"size" => "500x500\>"
+		),
+		"thumbnail" => array(
+			"dir" => "$dirThumbnail",
+			"size" => "180x360\>"
+		),
+		"square" => array(
+			"dir" => "$dirSquare",
+			"crop" => array("100", "100")
+		)
+	);
+
+	// Profile image configuration
+	$imageTypesProfile = array(
+		"original" => array(
+			"dir" => "$dirProfileOriginal",
+			"size" => "100%"
+		),
+		"profile" => array(
+			"dir" => "$dirProfileProfile",
+			"size" => "200x200\>"
+		),
+		"thumbnail" => array(
+			"dir" => "$dirProfileThumbnail",
+			"crop" => array("100", "100")
+		),
+		"square" => array(
+			"dir" => "$dirProfileSquare",
+			"crop" => array("50", "50")
+		)
+	);
+
+	// Mail sending confuguration
+	$senderName = "Meipi Installation"; // TODO: Change
+	$senderMail = "meipiInstallation@meipi.org"; // TODO: Change
+
+	// Configuration for entries at categories
+	$catLimit = "5";
+
+	// Character limit configuration
+	$charsInCategories = "300";
+	$lineInCategories = "35";
+	$charsInCategoriesTitle = "300";
+	$lineInCategoriesTitle = "30";
+	$charsInList = "800";
+	$lineInList = "140";
+	$charsInListTitle = "300";
+	$lineInListTitle = "80";
+	$charsInOverEntry = "100";
+	$lineInOverEntry = "30";
+	$charsInOverEntryTitle = "100";
+	$lineInOverEntryTitle = "30";
+
+	// Mosaic configuration
+	$mosaicLimit = "35";
+	$lastMosaicsLimit = "3";
+	$mosaicLastItemsLimit = "10";
+	$mosaicSelectedItemsLimit = "10";
+
+	// Date configuration
+	$dateFormat="%e/%c/%Y %T";
+	$serverTimeZone = 1;
+
+	// Tag Cloud
+	$tagCloud = array("5", "0", "0", "0", "5");
+
+	// Icon
+	$iconFont = "fonts/FreeSans.ttf";
+	$iconFontSize = "10";
+	$iconOffsetH = "4";
+
+	// Icon URL
+	//$iconsPath = "/";
+
+	// Configuration for paging results (used in meipi/list.php and meipis.php)
+	$pageSize = "10";
+	$pagesLinks = "2";
+
+	// Possible Languages
+	$meipiLangs = array("es", "en", "fr", "it", "pt");
+	$meipiLanguages = array("Espa&ntilde;ol", "English", "Fran&ccedil;ais", "Italiano", "Portugu&ecirc;s");
+
+	// ReCaptcha Keys
+	$reCaptchaPublicKey = "6LcTQAcAAAAAACr0RqPgMFLu5_WFlexb-CP3rHRN"; // TODO
+	$reCaptchaPrivateKey = "6LcTQAcAAAAAAALjhEcPDIs62K5yJWWQLAUgonh5"; // TODO
+
+	// Statistics
+	$statisticsConfig = array(
+		"meipi.org" => "<script src=\"http://www.google-analytics.com/urchin.js\" type=\"text/javascript\">\n</script>\n<script type=\"text/javascript\">\n_uacct = \"UA-XXXXXXX-1\";\nurchinTracker();\n</script>",  // TODO
+		"meipi.com" => "<script src=\"http://www.google-analytics.com/urchin.js\" type=\"text/javascript\">\n</script>\n<script type=\"text/javascript\">\n_uacct = \"UA-XXXXXXX-2\";\nurchinTracker();\n</script>", // TODO
+	);
+	function getStatistics()
+	{
+		global $statisticsConfig;
+		foreach($statisticsConfig as $address => $statistic)
+		{
+			if($address==="" || strpos($_SERVER["HTTP_HOST"].$_SERVER["SCRIPT_NAME"], $address)!==FALSE)
+			{
+				return $statistic;
+			}
+		}
+	}
+	$statistics = getStatistics();
+
+	// Profile image configuration
+	// Relative path from $baseFolder (filesystem) and $commonFiles (web server)
+	$dirProfileOriginal = "profile/images/original/";
+	$dirProfileProfile = "profile/images/profile/";
+	$dirProfileThumbnail = "profile/images/thumbnail/";
+	$dirProfileSquare = "profile/images/square/";
+
+?>

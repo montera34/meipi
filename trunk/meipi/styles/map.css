@@ -1,0 +1,46 @@
+html, body {
+	height: 100%;
+	font-family: sans-serif;
+	/*overflow: hidden;*/
+	}
+
+body {
+	margin: 0;
+	}
+	/*
+a:link {
+	color: #000;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #505050;
+	font-weight: bold;
+	text-decoration: underline;
+}
+*/
+#cabecera {
+  position: absolute;
+	top: 0px;
+	left:0px;
+	}
+/*#avanzamarco form {
+	display: inline;
+	margin-left: 10px;
+	}*/
+	
+/*#pie{
+	position: absolute;
+	bottom: 0px;
+	}*/
+
+#map {
+	height: 100%;
+}
+.category_1, .category_2, .category_3, .category_4  { text-align:left;}
+/* rge j*/

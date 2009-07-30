@@ -135,6 +135,12 @@
 	);
 
 	// Profile image configuration
+	// Relative path from $baseFolder (filesystem) and $commonFiles (web server)
+	$dirProfileOriginal = "profile/images/original/";
+	$dirProfileProfile = "profile/images/profile/";
+	$dirProfileThumbnail = "profile/images/thumbnail/";
+	$dirProfileSquare = "profile/images/square/";
+
 	$imageTypesProfile = array(
 		"original" => array(
 			"dir" => "$dirProfileOriginal",
@@ -225,12 +231,5 @@
 		}
 	}
 	$statistics = getStatistics();
-
-	// Profile image configuration
-	// Relative path from $baseFolder (filesystem) and $commonFiles (web server)
-	$dirProfileOriginal = "profile/images/original/";
-	$dirProfileProfile = "profile/images/profile/";
-	$dirProfileThumbnail = "profile/images/thumbnail/";
-	$dirProfileSquare = "profile/images/square/";
 
 ?>

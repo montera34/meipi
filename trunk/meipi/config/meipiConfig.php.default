@@ -14,7 +14,7 @@
 	$faqUrl = "http://www.meipi.org/faq.php";
 	$legalUrl = "http://www.meipi.org/legal.php";
 
-	// Base Folder: The local path to the code
+	// Base Folder: The local path to the code (it has to end with a '/')
 	$baseFolder = "/home/meipi/trunk/meipi/"; // TODO
 
 	// Configuration for Google Maps // TODO

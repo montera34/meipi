@@ -19,7 +19,7 @@ The following instructions will guide you through the installation of a _meipi_ 
 
 = Installation =
 
-  * Download the latest available version of the *Meipi* code. http://code.google.com/p/meipi/downloads/list
+  * [http://code.google.com/p/meipi/downloads/list Download] the latest available version of the *Meipi* code. 
   * Execute rc/install.sql in the database in order to create the necessary tables. Note: At the end of the file you can find the categories to create. You can update category names and descriptions.
   * Copy configuration files from meipi/config/ and remove ".default" from their name:
     * dbConfig.php.default to dbConfig.php

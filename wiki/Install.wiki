@@ -15,7 +15,7 @@ The following instructions will guide you through the installation of a _meipi_ 
   * Install a web server.
   * Install php.
   * Install imagemagick and php-gd (imagemagick, php5-gd). Your hosting web server might have them already available.
-  * Create a database. Keep the configuration details handy: you need them soon.
+  * [http://code.google.com/p/meipi/wiki/CreateDatabase Create a database]. Keep the configuration details handy: you need them soon.
 
 = Installation =
 

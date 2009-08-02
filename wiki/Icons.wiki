@@ -2,7 +2,10 @@
 #labels Phase-Design
 
 
+= Where = 
+Icons are hosted in the folder /images.
 
+(I suggest there must be an specific folder for them /images/icons to make it easier)
 
 = Icons Meipi 1.0 = 
 The following icons are the ones used in version 1.0 (PNG format). Following icons should be uploaded in SVG format.

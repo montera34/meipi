@@ -3,5 +3,6 @@
 
 
 
-= Iconos 1.0 =
-http://meipi.org/images/icon_4.png
+= Iconos 1.0 = 
+http://meipi.org/images/icon_1.png http://meipi.org/images/icon_2.png http://meipi.org/images/icon_3.png http://meipi.org/images/icon_4.png
+http://meipi.org/images/icon_1_out.png http://meipi.org/images/icon_2_out.png http://meipi.org/images/icon_3_out.png http://meipi.org/images/icon_4_out.png

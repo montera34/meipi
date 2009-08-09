@@ -13,7 +13,7 @@ The following instructions will guide you through the installation of a _meipi_ 
 = Previous requirements =
 
   * Install a web server.
-  * Install php.
+  * Install php and php-mysql packages (php5-mysql, php-apache2, libapache-mod-php5).
   * Install imagemagick and php-gd (imagemagick, php5-gd). Your hosting web server might have them already available.
   * [http://code.google.com/p/meipi/wiki/CreateDatabase Create a database]. Keep the configuration details handy: you need them soon.
 
@@ -31,7 +31,7 @@ The following instructions will guide you through the installation of a _meipi_ 
     * $db = Database name
   * Update meipi/config/meipiConfig.php. Check the comments for more configuration options, but make sure you update the following mandatory parameters at least:
     * baseFolder = Path of the files in the web servers filesystem. Must end in '/'
-    * google_maps_keys = Google Maps API keys. It is not needed for testing meipi in localhost but it is required to get one Google Maps API key for each domain used.
+    * google_maps_keys = Google Maps API keys. It is not needed for testing meipi in localhost but it is required to [http://code.google.com/apis/maps/signup.html get one Google Maps API key] for each domain used.
     * reCaptchaPublicKey and reCaptchaPrivateKey = ReCAPTCHA pair of keys. There is already a pair selected, but it is strongly recommended to register your domain for a new pair of keys in [http://recaptcha.net/ recaptcha.net], as otherwise the service will probably fail soon.
   * Give read and write permissions to the user running the web server to all folders under meipi/images/ and all folders under meipi/profile/images/
 

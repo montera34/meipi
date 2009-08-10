@@ -19,7 +19,7 @@ You will need to know the following parameters to configure meipi database. Look
 To host a meipi in your own servers you will need to install and configure the database server. You can follow these steps to configure your database server with a web application.
 
   * Install mysql-server and phpmyadmin and take note of the superuser password for the database server. You will need it to create meipi database user.
-  * Log in to phpmyadmin with your database superuser account. You can find phpmyadmin in http://localhost/phpmyadmin/ if you installed it locally or http://<server_address>/phpmyadmin from a different computer.
+  * Log in to phpmyadmin with your database superuser account. You can find phpmyadmin in http://localhost/phpmyadmin/ if you installed it locally or {{{http://<server_address>/phpmyadmin}}} from a different computer.
   * Go back to home and create a new database
   * Go to "Privileges" and create a new user with access to the database created
   * You can test if everything was created ok by trying to log into phpmyadmin with the new user and select the new database. You can execute the install.sql queries from phpmyadmin "Sql" tab once you select the database.

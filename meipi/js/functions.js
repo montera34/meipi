@@ -323,7 +323,7 @@ function loadNewMap(longitude,latitude,changeMarker)
 			}
 			return;
 		}
-	 	nMap = new GMap2(document.getElementById("newEntryMap"));
+	 	nMap = new GMap2(document.getElementById("newEntryMap"), mapOptions);
 		//nMap.setCenter(new GLatLng(37.4419, -122.1419), 13);
 		//nMap.addControl(new GSmallMapControl());
 		nMap.addControl(new GLargeMapControl());

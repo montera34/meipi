@@ -74,12 +74,12 @@
 
 		// Images
 		$msg = ereg_replace("&lt;img class=&quot;([- :;#a-zA-Z0-9]*)&quot; ", "&lt;img ", $msg);
-		$msg = ereg_replace("&lt;img[ \t]+title=&quot;(([-_a-zA-Z0-9;: ]|(&[aeiou]acute;))*)&quot; ", "&lt;img ", $msg);
-		$msg = ereg_replace("&lt;img (style=&quot;([-a-zA-Z0-9;: ]*)&quot; )?src=&quot;(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%\\|]*)&quot;( alt=&quot;([-a-zA-Z0-9\\.,:/\?=;% ]*)&quot;)?( width=&quot;([0-9]*)&quot;)?( height=&quot;([0-9]*)&quot;)? /&gt;", "<img style=\"\\2\" src=\"\\3\" alt=\"\\5\" width=\"\\7\" height=\"\\9\" />", $msg);
+		$msg = ereg_replace("&lt;img[ \t]+title=&quot;(([-_a-zA-Z0-9;: \.]|(&[aeiou]acute;))*)&quot; ", "&lt;img ", $msg);
+		$msg = ereg_replace("&lt;img (style=&quot;([-a-zA-Z0-9;: \.]*)&quot; )?src=&quot;(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%\\|]*)&quot;( alt=&quot;([-a-zA-Z0-9\\.,:/\?=;% ]*)&quot;)?( width=&quot;([0-9]*)&quot;)?( height=&quot;([0-9]*)&quot;)? /&gt;", "<img style=\"\\2\" src=\"\\3\" alt=\"\\5\" width=\"\\7\" height=\"\\9\" />", $msg);
 		//$msg = ereg_replace("&lt;img( title=&quot;([-a-zA-Z0-9\\.,:/\?=;% ]*)&quot;)? (style=&quot;([-a-zA-Z0-9;: ]*)&quot; )?src=&quot;(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%\\|]*)&quot;( alt=&quot;([-a-zA-Z0-9\\.,:/\?=;% ]*)&quot;)?( width=&quot;([0-9]*)&quot;)?( height=&quot;([0-9]*)&quot;)? /&gt;", "<img style=\"\\4\" src=\"\\5\" alt=\"\\7\" width=\"\\9\" height=\"\\11\" />", $msg);
 
-		$msg = ereg_replace("&lt;span style=&quot;([- :;#a-zA-Z0-9]*)&quot;&gt;", "<span style=\"\\1\">", $msg);
-		$msg = ereg_replace("&lt;p style=&quot;([- :;#a-zA-Z0-9]*)&quot;&gt;", "<p style=\"\\1\">", $msg);
+		$msg = ereg_replace("&lt;span style=&quot;([- :;#a-zA-Z0-9\.]*)&quot;&gt;", "<span style=\"\\1\">", $msg);
+		$msg = ereg_replace("&lt;p style=&quot;([- :;#a-zA-Z0-9\.]*)&quot;&gt;", "<p style=\"\\1\">", $msg);
 		$msg = ereg_replace("&lt;p class=&quot;([- :;#a-zA-Z0-9]*)&quot;&gt;", "<p class=\"\\1\">", $msg);
 
 		// Div elements not allowed
@@ -128,10 +128,10 @@
 		{
 			$msg = str_replace($encoded, $decoded, $msg);
 		}
-		$msg = ereg_replace("<a title=\"[-_&:;,#a-zA-Z0-9\\. ]*\" href=\"(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%#]*)\" target=\"[a-zA-Z0-9_]*\"( rel=\"nofollow\")?>", "", $msg);
-		$msg = ereg_replace("<img style=\"[-a-zA-Z0-9;: ]*\" src=\"(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%\\|]*)\" alt=\"[-a-zA-Z0-9\\.,:/\?=;% ]*\" width=\"[0-9]*\" height=\"[0-9]*\" />", "", $msg);
-		$msg = ereg_replace("<span style=\"([- :;#a-zA-Z0-9]*)\">", "", $msg);
-		$msg = ereg_replace("<p style=\"([- :;#a-zA-Z0-9]*)\">", "<br/>", $msg);
+		$msg = ereg_replace("<a title=\"[-_&:;,#a-zA-Z0-9\\. \.]*\" href=\"(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%#]*)\" target=\"[a-zA-Z0-9_]*\"( rel=\"nofollow\")?>", "", $msg);
+		$msg = ereg_replace("<img style=\"[-a-zA-Z0-9;: \.]*\" src=\"(https?://[-+_a-zA-Z0-9\\.,:/\?=&;%\\|]*)\" alt=\"[-a-zA-Z0-9\\.,:/\?=;% ]*\" width=\"[0-9]*\" height=\"[0-9]*\" />", "", $msg);
+		$msg = ereg_replace("<span style=\"([- :;#a-zA-Z0-9\.]*)\">", "", $msg);
+		$msg = ereg_replace("<p style=\"([- :;#a-zA-Z0-9\.]*)\">", "<br/>", $msg);
 		$msg = ereg_replace("<p class=\"([- :;#a-zA-Z0-9]*)\">", "<br/>", $msg);
 		return $msg;
 	}

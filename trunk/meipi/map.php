@@ -60,7 +60,9 @@ if($labelMaxLength<=0)
 
 			function load() {
 				if (GBrowserIsCompatible()) {
-				 	map = new GMap2(document.getElementById("map"),G_SATELLITE_MAP);
+					var mapOptions = {};
+					<? executePlugins("getMapConfig", Array("options" => "mapOptions")); ?>
+					map = new GMap2(document.getElementById("map"),mapOptions);
 <?
 					if($_REQUEST["embedded"]=="true")
 					{

@@ -3,6 +3,13 @@
 	$aCategories = getCategories();
 	global $idMeipi;
 ?>
+	<script type="text/javascript">
+		//<![CDATA[
+			var mapOptions = {};
+			<? executePlugins("getMapConfig", Array("options" => "mapOptions")); ?>
+		//]]>
+	</script>
+		
 <div id="newEntry" style="display: none;">
 	<form name="newEntryForm" method="post" action="actions/newEntry.php" enctype="multipart/form-data">
 		<input type="hidden" name="id_meipi" value="<?= $idMeipi ?>" />

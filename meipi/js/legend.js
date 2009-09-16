@@ -19,7 +19,7 @@ LegendControl.prototype.cfg = null;
 // position properly.
 LegendControl.prototype.initialize = function(map) {
   var container = document.createElement("div");
-	container.classNames().add("legendControl");
+	$(container).classNames().add("legendControl");
 
 	var contents = "";
 	var filterEnabled = this.cfg.filter;

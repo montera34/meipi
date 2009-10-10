@@ -12,6 +12,7 @@
 					var mapOsmarender = new GMapType([tilesOsmarender], G_NORMAL_MAP.getProjection(), "Osmarend");
 					<?= $params["options"] ?>.mapTypes = [mapMapnik, mapOsmarender];
 <?
+		return $params;
 	}
 	addPlugin("getMapConfig", "openstreetmap_getMapConfig");
 ?>

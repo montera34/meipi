@@ -12,7 +12,14 @@
 		$openEntry = $request["open_entry"];
 		if(strlen($openEntry)>0)
 		{
-			$openEntry = intval($openEntry);
+			if($openEntry == -1)
+			{
+				$openEntry =intval(getRandomIdEntry());
+			}
+			else
+			{
+				$openEntry = intval($openEntry);
+			}
 
 			$aParams["id_entry"]=$openEntry;
 			$aParams["content"]="yes";

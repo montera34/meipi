@@ -32,7 +32,7 @@ The following instructions will guide you through the installation of a _meipi_ 
     * $db = Database name
   * Update meipi/config/meipiConfig.php. Check the comments for more configuration options, but make sure you update the following mandatory parameters at least:
     * mainUrl = Change it to your own URL.
-    * baseFolder = Path of the files in the web servers filesystem. Must end in '/'
+    * baseFolder = Path of the files in the web servers filesystem. Must end in '/' (to obtain this path you can upload a file .php with the content <? phpinfo(); ?> in the folder where the meipi is installed).
     * commonFiles = change it to the folder where you have uploaded the content of /meipi¿
     * google_maps_keys = Google Maps API keys. It is not needed for testing meipi in localhost but it is required to [http://code.google.com/apis/maps/signup.html get one Google Maps API key] for each domain used.
     * reCaptchaPublicKey and reCaptchaPrivateKey = ReCAPTCHA pair of keys. There is already a pair selected, but it is strongly recommended to register your domain for a new pair of keys in [http://recaptcha.net/ recaptcha.net], as otherwise the service will probably fail soon.

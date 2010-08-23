@@ -147,7 +147,7 @@ if($labelMaxLength<=0)
 												{
 													id: "<?= $category["id_category"] ?>",
 													name: "<?= $category["category_name"] ?>",
-													image: "<?= ($useIcons=="true" ? "/images/icon_".$category["id_category"].".png" : "/meipi/label.php?text=meipi&cat=".$category["id_category"]."&width=38&height=24&stand=0") ?>"
+													image: "<?= ($useIcons=="true" ? $commonFiles."images/icon_".$category["id_category"].".png" : $commonFiles."label.php?text=meipi&cat=".$category["id_category"]."&width=38&height=24&stand=0") ?>"
 												}
 <?
 										}

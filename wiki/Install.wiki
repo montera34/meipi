@@ -50,4 +50,5 @@ Some basic checks to ensure that your _meipi_ is running properly:
       * Check write permissions for web server user in images files
       * Check imagemagick installation (when you install it in a web server as Godaddy you might have to change "convert" to "/usr/local/bin/convert" in the file "functions/meipi.php").
   * Go to map page. If label is not displayed -> Check gd installation
+* Check if the icons of map, mosaic, list and chanel are displayed. If not, correct the url in style/meipi.css
   * Add admin and editor users to meipi_permission table. Check your id_user in "My profile" page or in database. Values for type in meipi_permission table are 1 for Admin and 2 for Editor

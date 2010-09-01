@@ -103,6 +103,9 @@
 									<option value=""></option>
 									<option value="youtube">Youtube</option>
 									<option value="googlevideo">Google Video</option>
+									<option value="vimeo">Vimeo</option>
+                                    <option value="archiveaudio">Archive.org Audio</option>
+                                    <option value="bliptv">Blip.tv</option>
 									</select>
 									<input class="input" type="text" name="video" />
 								</div>

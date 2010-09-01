@@ -157,10 +157,30 @@
 		{
 			$content = $dirSquare.$content;
 		}
-		else if(strlen($content)>0 && ($type==1 || $type==2))
+		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_YOUTUBE))
 		{
-			$content = $commonFiles."images/video.gif";
+	        $p =  explode("&", $content); $p = $p[0];
+ 			$content = "http://img.youtube.com/vi/".$p."/2.jpg";
 		}
+        else if(strlen($content)>0 && ($type==MEIPI_MEDIA_VIMEO))
+        {
+                $hashvimeo = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$content.php"));
+                $content = $hashvimeo[0]["thumbnail_small"];
+        }
+        else if(strlen($content)>0 && ($type==MEIPI_MEDIA_BLIPTV))
+        {
+                $bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
+                $blipxml = new SimpleXMLElement($bliprss);
+                $ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
+                $content = $ns->thumbnail->attributes()->url;
+        }
+        else if(strlen($content)>0 && ($type==MEIPI_MEDIA_GOOGLEVIDEO))
+        {
+                $gvrss = file_get_contents("http://video.google.com/videofeed?docid=$content");
+                $gvxml = new SimpleXMLElement($gvrss);
+                $ns = $gvxml->channel->item->children("http://search.yahoo.com/mrss/");
+                $content = $ns->group->thumbnail->attributes()->url;
+        }
 		else if(strlen($content)>0 && $type==3)
 		{
 			$content = $commonFiles."images/lively.gif";

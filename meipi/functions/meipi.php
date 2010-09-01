@@ -7,6 +7,14 @@
 	$languagePath = $configsPath;
 	require_once($configsPath."functions/language.php");
 
+	// media types
+	define(MEIPI_MEDIA_YOUTUBE, 1);
+	define(MEIPI_MEDIA_GOOGLEVIDEO, 2);
+	define(MEIPI_MEDIA_VIMEO, 4);
+	define(MEIPI_MEDIA_ARCHIVEAUDIO, 5);
+	define(MEIPI_MEDIA_BLIPTV, 6);
+	
+
 	function checkMeipiPassword($request)
 	{
 		global $idMeipi, $meipiPassword;
@@ -918,11 +926,23 @@
 			{
 				if($videotype=="googlevideo")
 				{
-					$videotypecode=2;
+					$videotypecode=MEIPI_MEDIA_GOOGLEVIDEO;
 				}
+				elseif ($videotype=="vimeo")
+                {
+                    $videotypecode=MEIPI_MEDIA_VIMEO;
+                }
+                elseif ($videotype=="archiveaudio")
+                {
+                    $videotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
+                }
+                elseif($videotype=="bliptv")
+                {
+                    $videotypecode=MEIPI_MEDIA_BLIPTV;
+                }
 				else
 				{
-					$videotypecode=1;
+					$videotypecode=MEIPI_MEDIA_YOUTUBE;
 				}
 				$rcContent = dbUpdate("INSERT INTO `".CONTENT."`(file, id_entry, content_name, date, type) VALUES('$video', '$idEntry', 'Video', now(), $videotypecode)", $dbLink);
 			}
@@ -1002,11 +1022,23 @@
 			{
 				if($videotype=="googlevideo")
 				{
-					$videotypecode=2;
+					$videotypecode=MEIPI_MEDIA_GOOGLEVIDEO;
 				}
+				elseif($videotype=="vimeo")
+                {
+                    $videotypecode=MEIPI_MEDIA_VIMEO;
+                }
+                elseif($videotype=="archiveaudio")
+                {
+                    $videotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
+                }
+                elseif($videotype=="bliptv")
+                {
+                    $videotypecode=MEIPI_MEDIA_BLIPTV;
+                }
 				else
 				{
-					$videotypecode=1;
+					$videotypecode=MEIPI_MEDIA_YOUTUBE;
 				}
 				$rcContent = dbUpdate("INSERT INTO `".CONTENT."`(file, id_entry, content_name, date, type) VALUES('$video', '$idEntry', 'Video', now(), $videotypecode)", $dbLink);
 			}
@@ -1189,6 +1221,11 @@
 		$videoId = ereg_replace(".*v=", "", $videoId);
 		$videoId = ereg_replace(".*docid=", "", $videoId);
 		$videoId = ereg_replace("&.*", "", $videoId);
+        $videoId = ereg_replace(".*details/", "", $videoId);
+        $videoId = ereg_replace(".*download/", "", $videoId);
+        $videoId = ereg_replace(".*play/", "", $videoId);
+		$videoId = ereg_replace(".*file/", "", $videoId);
+		$videoId = ereg_replace(".*vimeo.com/", "", $videoId);
 		if(strlen($videoId)>0)
 			return encode($videoId);
 	}

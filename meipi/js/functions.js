@@ -547,6 +547,37 @@ function showEntryData(idMeipi,id,dirThumbnail,dirEntry,userId,isLogged)
 			setDivText("entryContent", "<a href=\"javascript:showEntryWindow('"+idMeipi+"', "+id+", '"+dirEntry+"','"+userId+"','"+isLogged+"');\" class=\"entryTitle_cat"+entries[id]["category"]+"\"><img src=\"/images/lively.gif\" /></a>");
 			document.getElementById("overEntry").style.width='250px';
 		}
+        else if (entries[id]["type"]=="4")
+        {
+            setDivText("entryContent", "<iframe src=\"http://player.vimeo.com/video/"+entries[id]["file"]+"\" width=\"400\" height=\"300\" frameborder=\"0\"></iframe>");
+            document.getElementById("overEntry").style.width='425px';
+        }
+        else if (entries[id]["type"]=="5")
+        {
+            setDivText("entryContent", "<embed FlashVars=\"autoPlay=true\" style=\"width:400px; height:326px;\" id=\"VideoPlayback\" type=\"application/x-shockwave-flash\" src=\"http://video.google.com/googleplayer.swf?docId="+entries[id]["file"]+"\" wmode=\"transparent\"></embed>");
+            document.getElementById("overEntry").style.width='425px';
+        }
+        else if (entries[id]["type"]=="6")
+        {
+			if (window.XMLHttpRequest)
+			{// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}
+			else
+			{// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			url="http://blip.tv/file/"+entries[id]["file"]+"?skin=rss";
+			xmlhttp.open("GET",url,false);
+			xmlhttp.send(null);
+			xmlDoc=xmlhttp.responseXML;
+			embed = xmlDoc.getElementsByTagName("media:player")[0].childNodes[0].nodeValue;
+			embed = embed.replace("width=\"480\"", "width=\"400\"");
+			embed = embed.replace("height=\"405\"","height=\"300\"");
+            setDivText("entryContent", embed);
+            document.getElementById("overEntry").style.width='425px';
+        }
+	
 	}
 	else
 	{

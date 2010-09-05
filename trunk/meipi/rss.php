@@ -17,13 +17,16 @@
 	$webTitle = decode($webTitle);
 	$webTitle = str_replace("<", "&lt;", $webTitle);
 	
+	$baseUrl = $mainUrl.$commonFiles;
+	$baseUrl = str_replace("//", "/", $baseUrl);
+
 	endRequest();
 echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 ?>
 <rss version="2.0">
 	<channel>
 		<title><![CDATA[<?= $webName ?>: <?= $webTitle ?>]]></title>
-		<link><![CDATA[<?= $mainUrl.$idMeipi ?>]]></link>
+		<link><![CDATA[<?= $baseUrl ?>]]></link>
 		<description><![CDATA[<?= getString("meipi entries") ?>]]></description>
 <?
 	for($iEntry=0; $iEntry<dbGetSelectedRows($aEntries); $iEntry++)
@@ -48,7 +51,7 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 		$last_edited = $aEntries[$iEntry]["dateLastEditedFormatted"];
 		$last_editor = $aEntries[$iEntry]["last_editor"];
 
-		$text = getString("Category").": <a href=\"".$mainUrl.setParams("list.php", Array("category" => $id_category))."\">".$category."</a><br/>".allowedHtml($text);
+		$text = getString("Category").": <a href=\"".$baseUrl.setParams("list.php", Array("category" => $id_category))."\">".$category."</a><br/>".allowedHtml($text);
 
 		if(strlen($content)>0)
 		{
@@ -56,7 +59,7 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 			{
 				default:
 				case 0:
-					$text = "<img src=\"$mainUrl$commonFiles$dirThumbnail$content\"/><br/>$text";
+					$text = "<img src=\"$baseUrl$dirThumbnail$content\"/><br/>$text";
 					break;
 				case 1:
 					$text = "<object height=\"350\" width=\"425\"><param name=\"movie\" value=\"http://www.youtube.com/v/$content\"><param name=\"wmode\" value=\"transparent\"><embed src=\"http://www.youtube.com/v/$content\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" height=\"350\" width=\"425\"></object><br/>".$text;
@@ -79,12 +82,12 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 
 ?>		<item>
 			<title><![CDATA[<?= $title ?>]]></title>
-			<link><![CDATA[<?= $mainUrl.setParams("meipi.php", Array("open_entry" => $id_entry)) ?>]]></link>
+			<link><![CDATA[<?= $baseUrl.setParams("meipi.php", Array("open_entry" => $id_entry)) ?>]]></link>
 			<author><![CDATA[<?= $login ?>]]></author>
 			<category><![CDATA[<?= $category ?>]]></category>
 			<pubDate><?= $dateRFC ?></pubDate>
 			<description><![CDATA[<?= $text ?>]]></description>
-			<guid><?= $mainUrl.setParams("meipi.php", Array("open_entry" => $id_entry)) ?></guid>
+			<guid><?= $baseUrl.setParams("meipi.php", Array("open_entry" => $id_entry)) ?></guid>
 		</item>
 <?
   }

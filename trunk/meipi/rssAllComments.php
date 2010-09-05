@@ -9,13 +9,16 @@
 	$webTitle = decode($webTitle);
 	$webTitle = str_replace("<", "&lt;", $webTitle);
 	
+	$baseUrl = $mainUrl.$commonFiles;
+	$baseUrl = str_replace("//", "/", $baseUrl);
+
 	endRequest();
 echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 ?>
 <rss version="2.0">
 	<channel>
 		<title><![CDATA[<?= $webName ?> <?= getString("rssComments") ?>: <?= $webTitle ?>]]></title>
-		<link><![CDATA[<?= $mainUrl.$idMeipi ?>]]></link>
+		<link><![CDATA[<?= $baseUrl ?>]]></link>
 		<description><![CDATA[<?= getString("meipi comments") ?>]]></description>
 <?
 	for($iComment=0; $iComment<count($aComments); $iComment++)
@@ -33,7 +36,7 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 ?>		<item>
 			<title><![CDATA[<?= $comment_subject ?>]]></title>
 			<author><![CDATA[<?= $comment_login ?>]]></author>
-			<link><![CDATA[<?= $mainUrl.setParams("meipi.php", Array("open_entry" => $comment_id_entry)) ?>]]></link>
+			<link><![CDATA[<?= $baseUrl.setParams("meipi.php", Array("open_entry" => $comment_id_entry)) ?>]]></link>
 			<pubDate><?= $comment_dateRFC ?></pubDate>
 			<description><![CDATA[<?= allowedHtml($comment_text) ?>]]></description>
 			<guid><?= $id_entry ?></guid>

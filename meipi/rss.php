@@ -56,7 +56,7 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 			{
 				default:
 				case 0:
-					$text = "<img src=\"$mainUrl$dirThumbnail$content\"/><br/>$text";
+					$text = "<img src=\"$mainUrl$commonFiles$dirThumbnail$content\"/><br/>$text";
 					break;
 				case 1:
 					$text = "<object height=\"350\" width=\"425\"><param name=\"movie\" value=\"http://www.youtube.com/v/$content\"><param name=\"wmode\" value=\"transparent\"><embed src=\"http://www.youtube.com/v/$content\" type=\"application/x-shockwave-flash\" wmode=\"transparent\" height=\"350\" width=\"425\"></object><br/>".$text;

@@ -17,8 +17,11 @@
 	$webTitle = decode($webTitle);
 	$webTitle = str_replace("<", "&lt;", $webTitle);
 	
-	$baseUrl = $mainUrl.$commonFiles;
-	$baseUrl = str_replace("//", "/", $baseUrl);
+	if(substr($mainUrl, -1)=="/" && substr($commonFiles, 0, 1)=="/") {
+		$baseUrl = $mainUrl.substr($commonFiles, 1);
+	} else {
+		$baseUrl = $mainUrl.$commonFiles;
+	}
 
 	endRequest();
 echo '<?xml version="1.0" encoding="iso-8859-1" ?>';

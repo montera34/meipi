@@ -207,8 +207,8 @@
 	$pagesLinks = "2";
 
 	// Possible Languages
-	$meipiLangs = array("es", "en", "fr", "it", "pt");
-	$meipiLanguages = array("Espa&ntilde;ol", "English", "Fran&ccedil;ais", "Italiano", "Portugu&ecirc;s");
+	$meipiLangs = array("es", "en", "fr", "it", "pt", "gl", "cs", "ca", "gr");
+	$meipiLanguages = array("Espa&ntilde;ol", "English", "Fran&ccedil;ais", "Italiano", "Portugu&ecirc;s", "Galego", "&#268;e&#353;tina", "Catal&agrave", "&#949;&#955;&#955;&#951;&#957;&#953;&#954;&#940;");
 
 	// ReCaptcha Keys
 	$reCaptchaPublicKey = "6LcTQAcAAAAAACr0RqPgMFLu5_WFlexb-CP3rHRN"; // TODO

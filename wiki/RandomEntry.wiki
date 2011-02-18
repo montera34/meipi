@@ -9,10 +9,3 @@ This method has been used for showing meipi at exhibition spaces and provides a 
 = Details =
 You must ad ?open_entry=-1 to your url.
 Example: http://meipi.org/6000km?open_entry=-1
-
-
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages

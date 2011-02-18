@@ -1,5 +1,5 @@
+#summary How to provide a sequence of random entries.
 #labels random
-How to provide a sequence of random entries.
 
 = Introduction =
 

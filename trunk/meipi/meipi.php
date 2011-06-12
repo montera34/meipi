@@ -525,69 +525,16 @@ if(intval($zoomLevelLastEntry)==0)
 								$content = $aEntries[$iCategory][$iEntry]["file"];
 								$type = $aEntries[$iCategory][$iEntry]["type"];
 								$date = $aEntries[$iCategory][$iEntry]["dateFormatted"];
-    						$votes = $aEntries[$iCategory][$iEntry]["votes"];
-    						$cssClass = $aEntries[$iCategory][$iEntry]["css_class"];
+								$votes = $aEntries[$iCategory][$iEntry]["votes"];
+								$cssClass = $aEntries[$iCategory][$iEntry]["css_class"];
 ?>
 							<div id="<?= $id_entry ?>" class="c<?= $categories[$iCategory]["id_category"] ?>_entrada <?= $cssClass ?>">
 								<div class="c<?= $categories[$iCategory]["id_category"] ?>_hentrada">
 										<a href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= dirEntry ?>','<?= $userId ?>','<?= $logged ?>');" title="<?= $title ?>"><?= getSubString($title,$charsInCategoriesTitle,$lineInCategoriesTitle) ?></a>
 								</div>
 								<div class="c<?= $categories[$iCategory]["id_category"] ?>_tentrada">
-<?
-								if(isset($content) && $type==0)
-								{
-?>
-								<img src="<?= $dirSquare ?><?= $content ?>" alt="<?= $title ?>" /><br />
-<?
-								}
-								else if(isset($content) && ($type==MEIPI_MEDIA_YOUTUBE))
-								{
-?>
-                                <? $p =  explode("&", $content); $p = $p[0]; ?>
-								<img src="http://img.youtube.com/vi/<?= $p ?>/2.jpg" alt="<?= $title ?>" width=80px height=80px /><br />
-<?
-								}
-								else if(isset($content) && ($type==MEIPI_MEDIA_VIMEO))
-								{
-									$hashvimeo = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$content.php"));
-									$img = $hashvimeo[0]["thumbnail_small"];
-?>
-									<img src="<?= $img ?>" alt="<?= $title ?>" width=80px height=80px /><br />
-<?
-								}
-                                else if(isset($content) && ($type==MEIPI_MEDIA_BLIPTV))
-                                {
-					                $bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
-					                $blipxml = new SimpleXMLElement($bliprss);
-					                $ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
-					                $img = $ns->thumbnail->attributes()->url;
-?>
-                                    <img src="<?= $img ?>" alt="<?= $title ?>" width=80px height=80px /><br />
-<?
-                                }
-                                else if(isset($content) && ($type==MEIPI_MEDIA_GOOGLEVIDEO))
-                                {
-					                $gvrss = file_get_contents("http://video.google.com/videofeed?docid=$content");
-					                $gvxml = new SimpleXMLElement($gvrss);
-					                $ns = $gvxml->channel->item->children("http://search.yahoo.com/mrss/");
-					                $img = $ns->group->thumbnail->attributes()->url;
-?>
-                                    <img src="<?= $img ?>" alt="<?= $title ?>" width=80px height=80px /><br />
-<?
-                                }
-                                else if(isset($content) && ($type==MEIPI_MEDIA_ARCHIVEAUDIO))
-								{
-?>
-                                    <img src="<?= $commonFiles ?>images/video.gif" alt="<?= $title ?>" /><br />
-<?
-								}
-								else if(strlen($content)>0 && $type==3)
-								{
-?>
-									<img src="<?= $commonFiles ?>images/lively.gif" alt="<?= $title ?>" /><br />
-<?
-								}
-?>
+									<img src="<?= getPreview($type, $content) ?>" alt="<?= $title ?>" /><br />
+
 									<?= getSubString(basicHtml(allowedHtml($text)),$charsInCategories,$lineInCategories) ?> <a href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= dirEntry ?>','<?= $userId ?>','<?= $logged ?>');" title="<?= $title ?>"><span class="extend">[<?= getString("Extend") ?>]</span></a>
 								</div>
 								<div class="c<?= $categories[$iCategory]["id_category"] ?>_pentrada">
@@ -642,44 +589,7 @@ if(intval($zoomLevelLastEntry)==0)
 			$type = $aEntriesList[$iEntry]["type"];
 			$cssClass = $aEntriesList[$iEntry]["css_class"];
 
-			if(strlen($content)>0 && $type==0)
-			{
-				$content = $dirSquare.$content;
-			}
-            else if(strlen($content)>0 && ($type==MEIPI_MEDIA_YOUTUBE))
-	        {
-	            $p =  explode("&", $content); $p = $p[0];
-	            $content = "http://img.youtube.com/vi/".$p."/2.jpg";
-			}
-			else if(strlen($content)>0 && ($type==MEIPI_MEDIA_VIMEO))
-			{
-				$hashvimeo = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$content.php"));
-				$content = $hashvimeo[0]["thumbnail_small"]; 
-
-			}
-			else if(strlen($content)>0 && ($type==MEIPI_MEDIA_BLIPTV))
-			{
-				$bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
-				$blipxml = new SimpleXMLElement($bliprss);
-				$ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
-				$content = $ns->thumbnail->attributes()->url;
-			}
-			else if(strlen($content)>0 && ($type==MEIPI_MEDIA_GOOGLEVIDEO))
-			{
-				$gvrss = file_get_contents("http://video.google.com/videofeed?docid=$content");
-				$gvxml = new SimpleXMLElement($gvrss);
-				$ns = $gvxml->channel->item->children("http://search.yahoo.com/mrss/");
-                $content = $ns->group->thumbnail->attributes()->url;
-
-			}
-			else if(strlen($content)>0 && $type==3)
-			{
-				$content = $commonFiles."images/lively.gif";
-			}
-			else
-			{
-				$content = $commonFiles."images/no-img.gif";
-			}
+			$content = getPreview($type, $content);
 
 			$aTags = getTags($id_entry);
 ?>

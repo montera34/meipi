@@ -60,7 +60,6 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 		{
 			switch($type)
 			{
-				default:
 				case 0:
 					$text = "<img src=\"$baseUrl$dirThumbnail$content\"/><br/>$text";
 					break;
@@ -69,6 +68,9 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>';
 					break;
 				case 2:
 					$text = "<embed style=\"width:400px; height:326px;\" id=\"VideoPlayback\" type=\"application/x-shockwave-flash\" src=\"http://video.google.com/googleplayer.swf?docId=".$content."\" wmode=\"transparent\"></embed><br/>".$text;
+					break;
+				default:
+					$text = getEmbedCode($type, $content)."<br/>".$text;
 					break;
 			}
 		}

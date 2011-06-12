@@ -54,6 +54,7 @@
 									<option value="photo"><?= getString("Image") ?></option>
 									<option value="without" selected><?= getString("WithoutImage") ?></option>
 									<option value="video"><?= getString("Video") ?></option>
+									<option value="audio"><?= getString("Audio") ?></option>
 									<?
 										global $livelyTypeEnabled;
 										if("true"==$livelyTypeEnabled)
@@ -104,14 +105,31 @@
 									<option value="youtube">Youtube</option>
 									<option value="googlevideo">Google Video</option>
 									<option value="vimeo">Vimeo</option>
-                                    <option value="archiveaudio">Archive.org Audio</option>
-                                    <option value="bliptv">Blip.tv</option>
+									<option value="bliptv">Blip.tv</option>
 									</select>
 									<input class="input" type="text" name="video" />
 								</div>
 								<div class="fo-desc"><?= getString("Select video...") ?>: <i><nobr>http://www.youtube.com/watch?v=SuBgGqGDPVE</nobr></i>
 							</div>
 
+							</div>
+						</div>
+
+						<div id="file_audio" style="display:none">
+							<div class="fo-fila">
+								<div class="fo-type">
+									<?= getString("Audio ID") ?>
+								</div>
+								<div class="fo-input">
+									<select class="input" name="audiotype" >
+										<option value=""></option>
+										<option value="archiveaudio">Archive.org Audio</option>
+										<option value="soundcloudaudio">Soundcloud.com Audio</option>
+									</select>
+									<input class="input" type="text" name="audio" />
+								</div>
+								<div class="fo-desc"><?= getString("Select audio...") ?>: <i><nobr>http://www.archive.org/download/your-file/your-file.mp3</nobr> or <nobr>http://soundcloud.com/song/link</nobr></i>
+								</div>
 							</div>
 						</div>
 

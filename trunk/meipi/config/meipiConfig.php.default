@@ -214,6 +214,9 @@
 	$reCaptchaPublicKey = "6LcTQAcAAAAAACr0RqPgMFLu5_WFlexb-CP3rHRN"; // TODO
 	$reCaptchaPrivateKey = "6LcTQAcAAAAAAALjhEcPDIs62K5yJWWQLAUgonh5"; // TODO
 
+	// SoundCloud API key
+	$souncloudConsumerKey = ""; // TODO (https://soundcloud.com/login?return_to=%2Fyou%2Fapps)
+
 	// Statistics
 	$statisticsConfig = array(
 		"meipi.org" => "<script src=\"http://www.google-analytics.com/urchin.js\" type=\"text/javascript\">\n</script>\n<script type=\"text/javascript\">\n_uacct = \"UA-XXXXXXX-1\";\nurchinTracker();\n</script>",  // TODO

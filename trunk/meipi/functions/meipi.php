@@ -2467,7 +2467,7 @@
 	 */
 	function getPreview($type, $content) {
 		global $_SESSION;
-		if(!isset($_SESSION["preview"][$type][$content]) || TRUE) {
+		if(!isset($_SESSION["preview"][$type][$content])) {
 			$_SESSION["preview"][$type][$content] = getPreviewInternal($type, $content);
 		}
 		return $_SESSION["preview"][$type][$content];
@@ -2496,17 +2496,17 @@
 		}
 		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_BLIPTV))
 		{
-			//$bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
-			//$blipxml = new SimpleXMLElement($bliprss);
-			//$ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
-			//return $ns->thumbnail->attributes()->url;
+			$bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
+			$blipxml = new SimpleXMLElement($bliprss);
+			$ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
+			return "".$ns->thumbnail->attributes()->url;
 		}
 		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_GOOGLEVIDEO))
 		{
 			$gvrss = file_get_contents("http://video.google.com/videofeed?docid=$content");
 			$gvxml = new SimpleXMLElement($gvrss);
 			$ns = $gvxml->channel->item->children("http://search.yahoo.com/mrss/");
-			return $ns->group->thumbnail->attributes()->url;
+			return "".$ns->group->thumbnail->attributes()->url;
 		}
 		else if(strlen($content)>0 && $type==3)
 		{
@@ -2523,7 +2523,7 @@
 
 	function getEmbedCode($type, $content, $dir="") {
 		global $_SESSION;
-		if(!isset($_SESSION["embed"][$type][$content]) /**/|| $type==MEIPI_MEDIA_SOUNDCLOUDAUDIO/**/) { // TODO
+		if(!isset($_SESSION["embed"][$type][$content])) {
 			$_SESSION["embed"][$type][$content][$dir] = getEmbedCodeInternal($type, $content, $dir);
 		}
 		return $_SESSION["embed"][$type][$content][$dir];

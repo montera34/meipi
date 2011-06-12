@@ -98,77 +98,9 @@
 			}
 
 ?>		<div class="c<?= $categories[$iCategory]["id_category"] ?>_entrada <?= $cssClass ?>" id="<?= $id_entry ?>">
-<?
-			if(isset($content) && $type==0)
-			{
-?>
-				<div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-					<a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $dirSquare ?><?= $content ?>" alt="<?= $title ?>" /></a>
-				</div>
-<?
-			}
-			else if(isset($content) && ($type==MEIPI_MEDIA_YOUTUBE))
-			{
-				$p =  explode("&", $content); $p = $p[0];
-				$img = "http://img.youtube.com/vi/".$p."/2.jpg";
-?>
-				<div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-					<a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $img ?>" alt="<?= $title ?>" /></a>
-				</div><!-- end class _ientrada -->
-<?
-			}
-            else if(isset($content) && ($type==MEIPI_MEDIA_VIMEO))
-            {
-                $hashvimeo = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$content.php"));
-                $img = $hashvimeo[0]["thumbnail_small"];
-?>
-                <div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-                    <a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $img ?>" alt="<?= $title ?>" /></a>
-                </div><!-- end class _ientrada -->
-<?
-            }
-            else if(isset($content) && ($type==MEIPI_MEDIA_BLIPTV))
-            {
-                $bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
-                $blipxml = new SimpleXMLElement($bliprss);
-                $ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
-                $img = $ns->thumbnail->attributes()->url;
-
-?>
-                <div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-                    <a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $img ?>" alt="<?= $title ?>" /></a>
-                </div><!-- end class _ientrada -->
-<?
-            }
-            else if(isset($content) && ($type==MEIPI_MEDIA_GOOGLEVIDEO))
-            {
-                $gvrss = file_get_contents("http://video.google.com/videofeed?docid=$content");
-                $gvxml = new SimpleXMLElement($gvrss);
-                $ns = $gvxml->channel->item->children("http://search.yahoo.com/mrss/");
-                $img = $ns->group->thumbnail->attributes()->url;
-?>
-                <div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-                    <a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $img ?>" alt="<?= $title ?>" /></a>
-                </div><!-- end class _ientrada -->
-<?
-            }
-			else if(isset($content) && $type==3)
-			{
-?>
-				<div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-					<a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $commonFiles ?>images/lively.gif" alt="<?= $title ?>" /></a>
-				</div><!-- end class _ientrada -->
-<?
-			}
-			else
-			{
-?>
-				<div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
-					<a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= $commonFiles ?>images/no-img.gif" alt="<?= $title ?>" /></a>
-				</div><!-- end class _ientrada -->
-<?
-			}
-?>
+			<div class="c<?= $categories[$iCategory]["id_category"] ?>_ientrada">
+				<a title="<?= $title ?>" href="javascript:showEntryWindow('<?= $idMeipi ?>', <?= $id_entry ?>,'<?= $dirEntry ?>','<?= $userId ?>','<?= $logged ?>');"><img width="75px" height="75px" src="<?= getPreview($type, $content) ?>" alt="<?= $title ?>" /></a>
+			</div>
 
 			<div class="c<?= $categories[$iCategory]["id_category"] ?>_tentrada">
 				<div class="c<?= $categories[$iCategory]["id_category"] ?>_hentrada">

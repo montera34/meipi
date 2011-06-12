@@ -13,6 +13,7 @@
 	define(MEIPI_MEDIA_VIMEO, 4);
 	define(MEIPI_MEDIA_ARCHIVEAUDIO, 5);
 	define(MEIPI_MEDIA_BLIPTV, 6);
+	define(MEIPI_MEDIA_SOUNDCLOUDAUDIO, 7);
 	
 
 	function checkMeipiPassword($request)
@@ -729,6 +730,10 @@
 				{
 					$video = storeVideo($request["video"]);
 				}
+				else if($request["filetype"]=="audio")
+				{
+					$audio = storeAudio($request["audio"]);
+				}
 				else if($request["filetype"]=="lively")
 				{
 					$lively = storeLively($request["lively"]);
@@ -767,6 +772,8 @@
 		$aEntry["image"] = $image;
 		$aEntry["video"] = $video;
 		$aEntry["videotype"] = $request["videotype"];
+		$aEntry["audio"] = $audio;
+		$aEntry["audiotype"] = $request["audiotype"];
 		$aEntry["lively"] = $lively;
 		$aEntry["tags"] = $aTags;
 		
@@ -902,6 +909,8 @@
 		$image = $aEntry["image"];
 		$video = $aEntry["video"];
 		$videotype = $aEntry["videotype"];
+		$audio = $aEntry["audio"];
+		$audiotype = $aEntry["audiotype"];
 		$lively = $aEntry["lively"];
 		$idEditor = getIdUser();
 
@@ -929,22 +938,40 @@
 					$videotypecode=MEIPI_MEDIA_GOOGLEVIDEO;
 				}
 				elseif ($videotype=="vimeo")
-                {
-                    $videotypecode=MEIPI_MEDIA_VIMEO;
-                }
-                elseif ($videotype=="archiveaudio")
-                {
-                    $videotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
-                }
-                elseif($videotype=="bliptv")
-                {
-                    $videotypecode=MEIPI_MEDIA_BLIPTV;
-                }
+				{
+					$videotypecode=MEIPI_MEDIA_VIMEO;
+				}
+				elseif ($videotype=="archiveaudio")
+				{
+					$videotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
+				}
+				elseif($videotype=="bliptv")
+				{
+					$videotypecode=MEIPI_MEDIA_BLIPTV;
+				}
+				elseif ($videotype=="soundcloudaudio")
+				{
+					$videotypecode=MEIPI_MEDIA_SOUNDCLOUDAUDIO;
+				}
 				else
 				{
 					$videotypecode=MEIPI_MEDIA_YOUTUBE;
 				}
 				$rcContent = dbUpdate("INSERT INTO `".CONTENT."`(file, id_entry, content_name, date, type) VALUES('$video', '$idEntry', 'Video', now(), $videotypecode)", $dbLink);
+			}
+
+			// Add content (audio)
+			if(strlen($audio)>0)
+			{
+				if ($audiotype=="archiveaudio")
+				{
+					$audiotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
+				}
+				else if ($audiotype=="soundcloudaudio")
+				{
+					$audiotypecode=MEIPI_MEDIA_SOUNDCLOUDAUDIO;
+				}
+				$rcContent = dbUpdate("INSERT INTO `".CONTENT."`(file, id_entry, content_name, date, type) VALUES('$audio', '$idEntry', 'audio', now(), $audiotypecode)", $dbLink);
 			}
 
 			// Add content (lively)
@@ -998,6 +1025,8 @@
 		$image = $aEntry["image"];
 		$video = $aEntry["video"];
 		$videotype = $aEntry["videotype"];
+		$audio = $aEntry["audio"];
+		$audiotype = $aEntry["audiotype"];
 		$lively = $aEntry["lively"];
 		$aTags = $aEntry["tags"];
 		$url = $aEntry["url"];
@@ -1025,23 +1054,42 @@
 					$videotypecode=MEIPI_MEDIA_GOOGLEVIDEO;
 				}
 				elseif($videotype=="vimeo")
-                {
-                    $videotypecode=MEIPI_MEDIA_VIMEO;
-                }
-                elseif($videotype=="archiveaudio")
-                {
-                    $videotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
-                }
-                elseif($videotype=="bliptv")
-                {
-                    $videotypecode=MEIPI_MEDIA_BLIPTV;
-                }
+				{
+					$videotypecode=MEIPI_MEDIA_VIMEO;
+				}
+				elseif($videotype=="archiveaudio")
+				{
+					$videotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
+				}
+				elseif($videotype=="bliptv")
+				{
+					$videotypecode=MEIPI_MEDIA_BLIPTV;
+				}
+				elseif ($videotype=="soundcloudaudio")
+				{
+					$videotypecode=MEIPI_MEDIA_SOUNDCLOUDAUDIO;
+				}
 				else
 				{
 					$videotypecode=MEIPI_MEDIA_YOUTUBE;
 				}
 				$rcContent = dbUpdate("INSERT INTO `".CONTENT."`(file, id_entry, content_name, date, type) VALUES('$video', '$idEntry', 'Video', now(), $videotypecode)", $dbLink);
 			}
+
+			//Add audio content
+			if(strlen($audio)>0)
+			{
+				if ($audiotype=="archiveaudio")
+				{
+					$audiotypecode=MEIPI_MEDIA_ARCHIVEAUDIO;
+				}
+				elseif($audiotype=="soundcloudaudio")
+				{
+					$audiotypecode=MEIPI_MEDIA_SOUNDCLOUDAUDIO;
+				}
+				$rcContent = dbUpdate("INSERT INTO `".CONTENT."`(file, id_entry, content_name, date, type) VALUES('$audio', '$idEntry', 'Audio', now(), $audiotypecode)", $dbLink);
+			}
+
 			// Add content (lively)
 			if(strlen($lively)>0)
 			{
@@ -1221,13 +1269,23 @@
 		$videoId = ereg_replace(".*v=", "", $videoId);
 		$videoId = ereg_replace(".*docid=", "", $videoId);
 		$videoId = ereg_replace("&.*", "", $videoId);
-        $videoId = ereg_replace(".*details/", "", $videoId);
-        $videoId = ereg_replace(".*download/", "", $videoId);
-        $videoId = ereg_replace(".*play/", "", $videoId);
+		$videoId = ereg_replace(".*details/", "", $videoId);
+		$videoId = ereg_replace(".*download/", "", $videoId);
+		$videoId = ereg_replace(".*play/", "", $videoId);
 		$videoId = ereg_replace(".*file/", "", $videoId);
 		$videoId = ereg_replace(".*vimeo.com/", "", $videoId);
 		if(strlen($videoId)>0)
 			return encode($videoId);
+	}
+
+	function storeAudio($audioId)
+	{
+		$audioId = ereg_replace(".*download/", "", $audioId);
+		$audioId = ereg_replace(".*/items/", "", $audioId);
+		$audioId = ereg_replace(".*file/", "", $audioId);
+		$audioId = ereg_replace(".*soundcloud.com/", "", $audioId);
+		if(strlen($audioId)>0)
+			return encode($audioId);
 	}
 
 	function storeLively($livelyId)
@@ -2402,6 +2460,139 @@
 
 			$rcExtra = dbUpdate("UPDATE `".EXTRA."` SET $set WHERE id_entry='$idEntry'", $dbLink);
 		}
+	}
+
+	/**
+	 * Get the preview image for the selected content and cache it in the session to avoid getting it many times
+	 */
+	function getPreview($type, $content) {
+		global $_SESSION;
+		if(!isset($_SESSION["preview"][$type][$content]) || TRUE) {
+			$_SESSION["preview"][$type][$content] = getPreviewInternal($type, $content);
+		}
+		return $_SESSION["preview"][$type][$content];
+	}
+
+  	/**
+   	 * Get the preview image for the selected content. Internal method, doesn't use any cache
+   	 */
+  	function getPreviewInternal($type, $content) {
+
+		global $commonFiles, $dirSquare;
+
+		if(strlen($content)>0 && $type==0)
+		{
+			return $dirSquare.$content;
+		}
+		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_YOUTUBE))
+		{
+			$p =  explode("&", $content); $p = $p[0];
+			return "http://img.youtube.com/vi/".$p."/2.jpg";
+		}
+		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_VIMEO))
+		{
+			$hashvimeo = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$content.php"));
+			return $hashvimeo[0]["thumbnail_small"];
+		}
+		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_BLIPTV))
+		{
+			//$bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
+			//$blipxml = new SimpleXMLElement($bliprss);
+			//$ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
+			//return $ns->thumbnail->attributes()->url;
+		}
+		else if(strlen($content)>0 && ($type==MEIPI_MEDIA_GOOGLEVIDEO))
+		{
+			$gvrss = file_get_contents("http://video.google.com/videofeed?docid=$content");
+			$gvxml = new SimpleXMLElement($gvrss);
+			$ns = $gvxml->channel->item->children("http://search.yahoo.com/mrss/");
+			return $ns->group->thumbnail->attributes()->url;
+		}
+		else if(strlen($content)>0 && $type==3)
+		{
+			return $commonFiles."images/lively.gif";
+		}
+		else if(isset($content) && ($type==MEIPI_MEDIA_SOUNDCLOUDAUDIO))
+		{
+			return $commonFiles."images/video.gif";
+		}
+
+		// No content
+		return $commonFiles."images/no-img.gif";
+	}
+
+	function getEmbedCode($type, $content, $dir="") {
+		global $_SESSION;
+		if(!isset($_SESSION["embed"][$type][$content]) /**/|| $type==MEIPI_MEDIA_SOUNDCLOUDAUDIO/**/) { // TODO
+			$_SESSION["embed"][$type][$content][$dir] = getEmbedCodeInternal($type, $content, $dir);
+		}
+		return $_SESSION["embed"][$type][$content][$dir];
+	}
+
+	function getEmbedCodeInternal($type, $content, $dir="") {
+		switch($type)
+		{
+		default:
+			// TODO: Add embed code for other types to this method
+			break;
+		case MEIPI_MEDIA_SOUNDCLOUDAUDIO:
+			$soundcloudData = getSoundcloudData($content);
+
+			$soundcloudTmp = strstr($soundcloudData, "<id");
+			$soundcloudTmp = strstr($soundcloudTmp, ">");
+			$soundcloudId = substr($soundcloudTmp, 1, strpos($soundcloudTmp, '<')-1);
+
+			$soundcloudTmp = strstr($soundcloudData, "<description>");
+			$soundcloudDescription = substr($soundcloudTmp, 13, strpos($soundcloudTmp, "</description>"));
+
+			$soundcloudTmp = strstr($soundcloudData, "<user>");
+			$soundcloudTmp = strstr($soundcloudTmp, "<id");
+			$soundcloudTmp = strstr($soundcloudTmp, ">");
+			$soundcloudUserId = substr($soundcloudTmp, 1, strpos($soundcloudTmp, '<')-1);
+
+			$soundcloudTmp = strstr($soundcloudData, "<username>");
+			$soundcloudUser = substr($soundcloudTmp, 10, strpos($soundcloudTmp, "</username>")-10);
+
+			$soundcloudTmp = strstr($soundcloudData, "<artwork-url>");
+			$soundcloudArtwork = substr($soundcloudTmp, 13, strpos($soundcloudTmp, "</artwork-url>")-13);
+
+			$embedCode = '<img src="'.$soundcloudArtwork.'" /><object height="81" width="100%"> <param name="movie" value="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$soundcloudId.'"></param> <param name="allowscriptaccess" value="always"></param> <embed allowscriptaccess="always" height="81" src="http://player.soundcloud.com/player.swf?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F'.$soundcloudId.'" type="application/x-shockwave-flash" width="100%"></embed> </object>  <span><a href="http://soundcloud.com/'.$content.'">'.$soundcloudDescription.'</a> by <a href="http://soundcloud.com/'.$soundcloudUserId.'">'.$soundcloudUser.'</a></span>';
+
+			return $embedCode;
+		}
+	}
+
+	function getSoundcloudData($content)
+	{
+		$soundcloudData = getMeipiCache('soundcloud_'.$content);
+		if ($soundcloudData===false) {
+			global $souncloudConsumerKey;
+
+			$soundcloudData = file_get_contents("http://api.soundcloud.com/resolve?url=http://soundcloud.com/$content&consumer_key=$souncloudConsumerKey");
+			putMeipiCache('soundcloud_'.$content, $soundcloudData);
+		}
+		return $soundcloudData;
+	}
+
+	function getMeipiCache($key) {
+		global $_REQUEST;
+		if(isset($_REQUEST[$key]))
+			return $_REQUEST[$key];
+
+		$dbLink = dbConnect();
+		$aCache = dbSelect("SELECT value FROM ".CACHE." WHERE `key`='".sqlEscape($key, $dbLink)."' LIMIT 1", $dbLink);
+		if(isset($aCache[0])) {
+			return $aCache[0]["value"];
+		}
+		return false;
+	}
+
+	function putMeipiCache($key, $value) {
+		global $_REQUEST;
+		$_REQUEST[$key] = $value;
+
+		$dbLink = dbConnect();
+		$rcContent = dbUpdate("INSERT INTO `".CACHE."`(`key`, `value`) VALUES('".sqlEscape($key, $dbLink)."', '".sqlEscape($value, $dbLink)."')", $dbLink);
 	}
 
 ?>

@@ -552,9 +552,9 @@ function showEntryData(idMeipi,id,dirThumbnail,dirEntry,userId,isLogged)
             setDivText("entryContent", "<iframe src=\"http://player.vimeo.com/video/"+entries[id]["file"]+"\" width=\"400\" height=\"300\" frameborder=\"0\"></iframe>");
             document.getElementById("overEntry").style.width='425px';
         }
-        else if (entries[id]["type"]=="5")
+        else if (entries[id]["type"]=="5" || entries[id]["type"]=="7")
         {
-            setDivText("entryContent", "<embed FlashVars=\"autoPlay=true\" style=\"width:400px; height:326px;\" id=\"VideoPlayback\" type=\"application/x-shockwave-flash\" src=\"http://video.google.com/googleplayer.swf?docId="+entries[id]["file"]+"\" wmode=\"transparent\"></embed>");
+            setDivText("entryContent", "<a href=\"javascript:showEntryWindow('"+idMeipi+"', "+id+", '"+dirEntry+"','"+userId+"','"+isLogged+"');\"><img src=\""+getString("commonFiles")+"images/video.gif\" /></a>");
             document.getElementById("overEntry").style.width='425px';
         }
         else if (entries[id]["type"]=="6")

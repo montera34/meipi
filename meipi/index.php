@@ -557,10 +557,10 @@ if(intval($zoomLevelLastEntry)==0)
 								}
                                 else if(isset($content) && ($type==MEIPI_MEDIA_BLIPTV))
                                 {
-					                $bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
-					                $blipxml = new SimpleXMLElement($bliprss);
-					                $ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
-					                $img = $ns->thumbnail->attributes()->url;
+					                //$bliprss = file_get_contents("http://blip.tv/file/$content?skin=rss");
+					                //$blipxml = new SimpleXMLElement($bliprss);
+					                //$ns = $blipxml->channel->item->children("http://search.yahoo.com/mrss/");
+					                //$img = $ns->thumbnail->attributes()->url;
 ?>
                                     <img src="<?= $img ?>" alt="<?= $title ?>" width=80px height=80px /><br />
 <?

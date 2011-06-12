@@ -286,8 +286,12 @@
     <object width="640" height="26" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"><param value="true" name="allowfullscreen"/><param value="always" name="allowscriptaccess"/><param value="high" name="quality"/><param value="true" name="cachebusting"/><param value="#000000" name="bgcolor"/><param name="movie" value="http://www.archive.org/flow/flowplayer.commercial-3.2.1.swf" /><param value="config={'key':'#$aa4baff94a9bdcafce8','playlist':[{'url':'<?= ereg_replace(".*/", "", $content) ?>','autoPlay':false}],'clip':{'autoPlay':true,'baseUrl':'http://www.archive.org/download/<?= ereg_replace("/.*", "", $content) ?>/'},'canvas':{'backgroundColor':'#000000','backgroundGradient':'none'},'plugins':{'audio':{'url':'http://www.archive.org/flow/flowplayer.audio-3.2.0.swf'},'controls':{'playlist':false,'fullscreen':false,'height':26,'backgroundColor':'#000000','autoHide':{'fullscreenOnly':true},'scrubberHeightRatio':0.6,'timeFontSize':9,'mute':false,'top':0}},'contextMenu':[{},'-','Flowplayer v3.2.1']}" name="flashvars"/><embed src="http://www.archive.org/flow/flowplayer.commercial-3.2.1.swf" type="application/x-shockwave-flash" width="640" height="26" allowfullscreen="true" allowscriptaccess="always" cachebusting="true" bgcolor="#000000" quality="high" flashvars="config={'key':'#$aa4baff94a9bdcafce8','playlist':[{'url':'<?= ereg_replace(".*/", "", $content) ?>','autoPlay':false}],'clip':{'autoPlay':true,'baseUrl':'http://www.archive.org/download/<?= ereg_replace("/.*", "", $content) ?>/'},'canvas':{'backgroundColor':'#000000','backgroundGradient':'none'},'plugins':{'audio':{'url':'http://www.archive.org/flow/flowplayer.audio-3.2.0.swf'},'controls':{'playlist':false,'fullscreen':false,'height':26,'backgroundColor':'#000000','autoHide':{'fullscreenOnly':true},'scrubberHeightRatio':0.6,'timeFontSize':9,'mute':false,'top':0}},'contextMenu':[{},'-','Flowplayer v3.2.1']}"> </embed></object>
 <?          break;
 		case 6:
-			$xml= new SimpleXMLElement(file_get_contents("http://blip.tv/file/$content?skin=api"));
-			echo $xml->payload->asset->embedCode;
+			//$xml= new SimpleXMLElement(file_get_contents("http://blip.tv/file/$content?skin=api"));
+			//echo $xml->payload->asset->embedCode;
+			break;
+
+		case 7: // MEIPI_MEDIA_SOUNDCLOUDAUDIO
+			echo getEmbedCode($type, $content);
 			break;
     }
 

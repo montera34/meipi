@@ -1274,6 +1274,7 @@
 		$videoId = ereg_replace(".*play/", "", $videoId);
 		$videoId = ereg_replace(".*file/", "", $videoId);
 		$videoId = ereg_replace(".*vimeo.com/", "", $videoId);
+		$videoId = ereg_replace(".*youtu.be/", "", $videoId);
 		if(strlen($videoId)>0)
 			return encode($videoId);
 	}

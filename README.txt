@@ -17,5 +17,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # Meipi Open/s
 Meipi Open/s is an open source project created by meipi.
 
-It is hosted at http://github.com/montera34/meipi/ where you can find
+It is hosted at https://github.com/montera34/meipi/ where you can find
 updates, documentation, tutorials and how-tos.
